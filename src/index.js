@@ -1,1 +1,1 @@
-// Entry point for Stellar-Wallet-Toolkit
+// Compiled output will overwrite this file

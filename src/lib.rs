@@ -1,2 +1,1 @@
-// Core logic for Stellar-Wallet-Toolkit
-#![no_std]
+// File deleted - project rewritten to TypeScript
