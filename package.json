@@ -1,5 +1,5 @@
 {
-  "name": "stellar-wallet-helper",
+  "name": "sharif-stellar-tools/stellar-wallet-helper",
   "version": "1.0.0",
   "description": "Professional SDK for the Stellar Ecosystem",
   "main": "dist/index.js",
