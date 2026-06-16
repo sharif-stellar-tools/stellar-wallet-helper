@@ -1,2 +1,7 @@
-// Complex API Router Simulation 
- import { CoreEngine } from '../core/engine'; export const router = { handle: (req) => { new CoreEngine().processTx(req.id); } };
+import { CoreEngine } from '../core/engine';
+
+const engine = new CoreEngine();
+
+export const router = {
+  handle: (req: { id: string }) => engine.processTx(req.id),
+};
