@@ -4,7 +4,7 @@ export class CoreEngine {
    * Creates and initializes a new CoreEngine instance.
    */
   constructor() {
-    console.log('Engine initialized');
+    console.log("Engine initialized");
   }
 
   /**

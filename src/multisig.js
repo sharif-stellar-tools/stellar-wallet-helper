@@ -1,5 +1,7 @@
-import { Transaction, FeeBumpTransaction, Keypair } from "@stellar/stellar-sdk";
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addSignerToTransaction = addSignerToTransaction;
+exports.checkSignatureThreshold = checkSignatureThreshold;
 /**
  * Adds a secondary signer to an existing transaction envelope.
  *
@@ -7,13 +9,10 @@ import { Transaction, FeeBumpTransaction, Keypair } from "@stellar/stellar-sdk";
  * @param signerKeypair The keypair of the secondary signer.
  * @returns The updated transaction containing the new signature.
  */
-export function addSignerToTransaction<
-  T extends Transaction | FeeBumpTransaction
->(transaction: T, signerKeypair: Keypair): T {
-  transaction.sign(signerKeypair);
-  return transaction;
+function addSignerToTransaction(transaction, signerKeypair) {
+    transaction.sign(signerKeypair);
+    return transaction;
 }
-
 /**
  * Checks if the transaction has met the required signature threshold.
  *
@@ -21,11 +20,6 @@ export function addSignerToTransaction<
  * @param requiredThreshold The number of required signatures (M-of-N).
  * @returns True if the transaction has enough signatures, otherwise false.
  */
-export function checkSignatureThreshold(
-  transaction: Transaction | FeeBumpTransaction,
-  requiredThreshold: number
-): boolean {
-  return (
-    requiredThreshold <= 0 || transaction.signatures.length >= requiredThreshold
-  );
+function checkSignatureThreshold(transaction, requiredThreshold) {
+    return (requiredThreshold <= 0 || transaction.signatures.length >= requiredThreshold);
 }
