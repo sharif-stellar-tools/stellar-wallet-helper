@@ -1,4 +1,4 @@
-import { CoreEngine } from '../core/engine';
+import { CoreEngine } from "../core/engine";
 
 const engine = new CoreEngine();
 

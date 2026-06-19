@@ -1,6 +1,6 @@
-import { Keypair } from '@stellar/stellar-sdk';
-import * as bip39 from 'bip39';
-import { derivePath } from 'ed25519-hd-key';
+import { Keypair } from "@stellar/stellar-sdk";
+import * as bip39 from "bip39";
+import { derivePath } from "ed25519-hd-key";
 
 /** Provides utility methods for creating and restoring Stellar wallets. */
 export class WalletManager {
@@ -9,7 +9,9 @@ export class WalletManager {
    *
    * @returns A newly generated random {@link Keypair}.
    */
-  static createWallet(): Keypair { return Keypair.random(); }
+  static createWallet(): Keypair {
+    return Keypair.random();
+  }
 
   /**
    * Restores a Stellar keypair from an existing secret (private) key.
@@ -17,7 +19,9 @@ export class WalletManager {
    * @param secret - The base32-encoded Stellar secret key (starts with 'S').
    * @returns The {@link Keypair} derived from the provided secret key.
    */
-  static fromSecret(secret: string): Keypair { return Keypair.fromSecret(secret); }
+  static fromSecret(secret: string): Keypair {
+    return Keypair.fromSecret(secret);
+  }
 
   /**
    * Generates a new BIP-39 mnemonic phrase.
@@ -36,12 +40,12 @@ export class WalletManager {
    * @param index - The account index to derive (non-negative integer).
    */
   static fromMnemonic(mnemonic: string, index = 0): Keypair {
-    if (!bip39.validateMnemonic(mnemonic)) throw new Error('Invalid mnemonic');
-    if (!Number.isInteger(index) || index < 0) throw new Error('Invalid index');
+    if (!bip39.validateMnemonic(mnemonic)) throw new Error("Invalid mnemonic");
+    if (!Number.isInteger(index) || index < 0) throw new Error("Invalid index");
 
     const seed = bip39.mnemonicToSeedSync(mnemonic);
     const path = `m/44'/148'/${index}'`;
-    const { key } = derivePath(path, seed.toString('hex'));
+    const { key } = derivePath(path, seed.toString("hex"));
     // key is a 32-byte private key for ed25519 — Stellar's Keypair.fromRawEd25519Seed accepts it
     return Keypair.fromRawEd25519Seed(key);
   }
