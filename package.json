@@ -11,15 +11,18 @@
         "format": "prettier --write \"src/**/*.ts\""
     },
     "dependencies": {
-        "@stellar/stellar-sdk": "^16.0.1",
+        "@stellar/stellar-sdk": "15.1.0",
         "axios": "^1.6.0",
         "bip39": "^3.0.4",
         "ed25519-hd-key": "^1.0.3"
     },
     "devDependencies": {
+        "@babel/core": "^8.0.1",
+        "@babel/preset-env": "^8.0.2",
         "@types/bip39": "^2.4.2",
         "@types/jest": "^29.5.0",
         "@types/node": "^20.0.0",
+        "babel-jest": "^30.4.1",
         "eslint": "^8.40.0",
         "jest": "^29.5.0",
         "prettier": "^2.8.8",
@@ -27,6 +30,9 @@
         "typescript": "^5.0.0"
     },
     "private": true,
+    "overrides": {
+        "axios": "^1.16.0"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/sharif-stellar-tools/stellar-wallet-helper.git"
