@@ -11,10 +11,10 @@
         "format": "prettier --write \"src/**/*.ts\""
     },
     "dependencies": {
-        "@stellar/stellar-sdk": "^15.1.0",
+        "@stellar/stellar-sdk": "^16.0.1",
+        "axios": "^1.6.0",
         "bip39": "^3.0.4",
-        "ed25519-hd-key": "^1.0.3",
-        "axios": "^1.6.0"
+        "ed25519-hd-key": "^1.0.3"
     },
     "devDependencies": {
         "@types/bip39": "^2.4.2",
