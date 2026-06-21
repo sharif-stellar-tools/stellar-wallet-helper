@@ -44,14 +44,18 @@ class WalletManager {
      *
      * @returns A newly generated random {@link Keypair}.
      */
-    static createWallet() { return stellar_sdk_1.Keypair.random(); }
+    static createWallet() {
+        return stellar_sdk_1.Keypair.random();
+    }
     /**
      * Restores a Stellar keypair from an existing secret (private) key.
      *
      * @param secret - The base32-encoded Stellar secret key (starts with 'S').
      * @returns The {@link Keypair} derived from the provided secret key.
      */
-    static fromSecret(secret) { return stellar_sdk_1.Keypair.fromSecret(secret); }
+    static fromSecret(secret) {
+        return stellar_sdk_1.Keypair.fromSecret(secret);
+    }
     /**
      * Generates a new BIP-39 mnemonic phrase.
      *
@@ -69,12 +73,12 @@ class WalletManager {
      */
     static fromMnemonic(mnemonic, index = 0) {
         if (!bip39.validateMnemonic(mnemonic))
-            throw new Error('Invalid mnemonic');
+            throw new Error("Invalid mnemonic");
         if (!Number.isInteger(index) || index < 0)
-            throw new Error('Invalid index');
+            throw new Error("Invalid index");
         const seed = bip39.mnemonicToSeedSync(mnemonic);
         const path = `m/44'/148'/${index}'`;
-        const { key } = (0, ed25519_hd_key_1.derivePath)(path, seed.toString('hex'));
+        const { key } = (0, ed25519_hd_key_1.derivePath)(path, seed.toString("hex"));
         // key is a 32-byte private key for ed25519 — Stellar's Keypair.fromRawEd25519Seed accepts it
         return stellar_sdk_1.Keypair.fromRawEd25519Seed(key);
     }

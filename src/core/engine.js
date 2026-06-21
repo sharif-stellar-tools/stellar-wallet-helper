@@ -7,7 +7,7 @@ class CoreEngine {
      * Creates and initializes a new CoreEngine instance.
      */
     constructor() {
-        console.log('Engine initialized');
+        console.log("Engine initialized");
     }
     /**
      * Processes a Stellar transaction asynchronously by its unique identifier.

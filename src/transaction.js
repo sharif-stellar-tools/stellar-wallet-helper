@@ -23,7 +23,7 @@ class TxManager {
      */
     async buildPayment(source, dest, amount) {
         const sourceAccount = await this.server.loadAccount(source);
-        let baseFee = '100';
+        let baseFee = "100";
         try {
             const feeStats = await this.server.feeStats();
             if (feeStats && feeStats.fee_charged && feeStats.fee_charged.mode) {

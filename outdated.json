@@ -1,0 +1,58 @@
+{
+  "@stellar/stellar-sdk": {
+    "current": "15.1.0",
+    "wanted": "15.1.0",
+    "latest": "16.0.1",
+    "dependent": "stellar-wallet-helper",
+    "location": "/workspaces/stellar-wallet-helper/node_modules/@stellar/stellar-sdk"
+  },
+  "@types/jest": {
+    "current": "29.5.14",
+    "wanted": "29.5.14",
+    "latest": "30.0.0",
+    "dependent": "stellar-wallet-helper",
+    "location": "/workspaces/stellar-wallet-helper/node_modules/@types/jest"
+  },
+  "@types/node": {
+    "current": "20.19.43",
+    "wanted": "20.19.43",
+    "latest": "26.0.0",
+    "dependent": "stellar-wallet-helper",
+    "location": "/workspaces/stellar-wallet-helper/node_modules/@types/node"
+  },
+  "ed25519-hd-key": {
+    "current": "1.3.0",
+    "wanted": "1.3.0",
+    "latest": "2.0.0",
+    "dependent": "stellar-wallet-helper",
+    "location": "/workspaces/stellar-wallet-helper/node_modules/ed25519-hd-key"
+  },
+  "eslint": {
+    "current": "8.57.1",
+    "wanted": "8.57.1",
+    "latest": "10.5.0",
+    "dependent": "stellar-wallet-helper",
+    "location": "/workspaces/stellar-wallet-helper/node_modules/eslint"
+  },
+  "jest": {
+    "current": "29.7.0",
+    "wanted": "29.7.0",
+    "latest": "30.4.2",
+    "dependent": "stellar-wallet-helper",
+    "location": "/workspaces/stellar-wallet-helper/node_modules/jest"
+  },
+  "prettier": {
+    "current": "2.8.8",
+    "wanted": "2.8.8",
+    "latest": "3.8.4",
+    "dependent": "stellar-wallet-helper",
+    "location": "/workspaces/stellar-wallet-helper/node_modules/prettier"
+  },
+  "typescript": {
+    "current": "5.9.3",
+    "wanted": "5.9.3",
+    "latest": "6.0.3",
+    "dependent": "stellar-wallet-helper",
+    "location": "/workspaces/stellar-wallet-helper/node_modules/typescript"
+  }
+}
