@@ -1,0 +1,11 @@
+C:\Users\user\Desktop\Grantfox projects\stellar-wallet-helper\target\debug\deps\wasmi_core-d74ed0f33428bec2.d: C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\lib.rs C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\host_error.rs C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\nan_preserving_float.rs C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\trap.rs C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\units.rs C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\untyped.rs C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\value.rs
+
+C:\Users\user\Desktop\Grantfox projects\stellar-wallet-helper\target\debug\deps\libwasmi_core-d74ed0f33428bec2.rmeta: C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\lib.rs C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\host_error.rs C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\nan_preserving_float.rs C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\trap.rs C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\units.rs C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\untyped.rs C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\value.rs
+
+C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\lib.rs:
+C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\host_error.rs:
+C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\nan_preserving_float.rs:
+C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\trap.rs:
+C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\units.rs:
+C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\untyped.rs:
+C:\Users\user\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmi_core-0.13.0\src\value.rs:
