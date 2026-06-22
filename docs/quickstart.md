@@ -252,6 +252,7 @@ node scripts/send-payment.js
 
 | Topic | Where to look |
 |---|---|
+| Path payments | [`docs/path-payments.md`](./path-payments.md) — `PathPaymentManager`, `calculateDestinationMin`, `calculateSendMax` |
 | Multisig transactions | `src/multisig.ts` — `addSignerToTransaction`, `checkSignatureThreshold` |
 | BIP-44 key derivation | `src/wallet.ts` — `WalletManager.fromMnemonic` |
 | API routing | `src/api/router.ts` — `router.handle` |
