@@ -1,6 +1,7 @@
 import { Keypair } from "@stellar/stellar-sdk";
 import * as bip39 from "bip39";
 import { derivePath } from "ed25519-hd-key";
+import { split, combine } from "./utils/sss";
 
 /** Provides utility methods for creating and restoring Stellar wallets. */
 export class WalletManager {
@@ -49,4 +50,40 @@ export class WalletManager {
     // key is a 32-byte private key for ed25519 — Stellar's Keypair.fromRawEd25519Seed accepts it
     return Keypair.fromRawEd25519Seed(key);
   }
+
+  /**
+   * Splits a mnemonic phrase into M-of-N shards using Shamir's Secret Sharing.
+   *
+   * @param mnemonic - The BIP-39 mnemonic phrase to split.
+   * @param threshold - The minimum number of shards required to reconstruct the mnemonic.
+   * @param numShards - The total number of shards to generate.
+   * @returns An array of shards, each represented as a hex string.
+   */
+  static splitMnemonic(
+    mnemonic: string,
+    threshold: number,
+    numShards: number
+  ): string[] {
+    if (!bip39.validateMnemonic(mnemonic)) throw new Error("Invalid mnemonic");
+    const secret = new TextEncoder().encode(mnemonic);
+    const shares = split(secret, threshold, numShards);
+    return shares.map((s) => Buffer.from(s).toString("hex"));
+  }
+
+  /**
+   * Reconstructs a mnemonic phrase from a set of shards.
+   *
+   * @param shards - An array of shards (hex strings).
+   * @returns The reconstructed BIP-39 mnemonic phrase.
+   */
+  static combineMnemonic(shards: string[]): string {
+    if (!shards || shards.length === 0) throw new Error("No shards provided");
+    const shares = shards.map((s) => new Uint8Array(Buffer.from(s, "hex")));
+    const secret = combine(shares);
+    const mnemonic = new TextDecoder().decode(secret);
+    if (!bip39.validateMnemonic(mnemonic))
+      throw new Error("Reconstructed mnemonic is invalid");
+    return mnemonic;
+  }
 }
+

@@ -1,0 +1,9 @@
+[package]
+name = "stellar-wallet-helper"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# 👇 FIXED: Changed from 22.1.3 to 22.0.11
+soroban-sdk = "22.0.11" 
+rand = "0.8.5"
