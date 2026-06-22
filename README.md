@@ -36,6 +36,7 @@ cd stellar-wallet-helper
 ## Tutorials
 
 - [Signing a Stellar transaction with stellar-wallet-helper](./docs/signing-tutorial.md)
+- [Path payments: strict-send & strict-receive with slippage bounds](./docs/path-payments.md)
 
 ## 馃 Contributing
 We welcome contributions from the community! Please read our [Contributing Guidelines](./CONTRIBUTING.md) to get started. Before submitting a Pull Request, ensure that you have reviewed our [Code of Conduct](./CODE_OF_CONDUCT.md).
