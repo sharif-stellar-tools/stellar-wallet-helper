@@ -1,10 +1,12 @@
 name: PR Automation
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened] # For CI checks on the PR code
+  pull_request_target:
+    types: [opened] # For welcoming and labeling, with write permissions
 
 jobs:
-  pr-review:
+  pr-welcome-and-label:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -29,7 +31,7 @@ jobs:
             if (branchName.startsWith('fix/')) labels.push('bug');
             else if (branchName.startsWith('feat/')) labels.push('enhancement');
             else if (branchName.startsWith('docs/')) labels.push('documentation');
-            
+
             if (labels.length > 0) {
               github.rest.issues.addLabels({
                 issue_number: context.issue.number,
