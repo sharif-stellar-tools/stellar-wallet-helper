@@ -1,24 +1,27 @@
 name: PR Automation
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+  pull_request_target:
+    types: [opened] # Restrict to pull_request_target for secure write-access context
+
+# Top-level permissions enforcement overrides any default repository down-grades
+permissions:
+  pull-requests: write
+  issues: write
+  contents: read
 
 jobs:
-  pr-review:
+  pr-welcome-and-label:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-      contents: read
     steps:
       - name: Welcome Contributor
         uses: actions/github-script@v6
         with:
           script: |
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: context.payload.pull_request.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '?? Welcome to the sharif-stellar-tools! Thank you for submitting this PR for the Sharif campaign. Our maintainers will review your contribution shortly. In the meantime, please ensure your code passes the CI checks.'
+              body: '👋 Welcome to the sharif-stellar-tools! Thank you for submitting this PR for the Sharif campaign. Our maintainers will review your contribution shortly. In the meantime, please ensure your code passes the CI checks.'
             })
       - name: Label PR based on branch
         uses: actions/github-script@v6
@@ -29,10 +32,10 @@ jobs:
             if (branchName.startsWith('fix/')) labels.push('bug');
             else if (branchName.startsWith('feat/')) labels.push('enhancement');
             else if (branchName.startsWith('docs/')) labels.push('documentation');
-            
+
             if (labels.length > 0) {
               github.rest.issues.addLabels({
-                issue_number: context.issue.number,
+                issue_number: context.payload.pull_request.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 labels: labels

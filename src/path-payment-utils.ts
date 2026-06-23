@@ -292,8 +292,16 @@ export function amountToStroops(amount: string): bigint {
     );
   }
 
-  const [whole, fraction = ""] = trimmed.split(".");
-  const paddedFraction = fraction.padEnd(7, "0");
+  let whole = "0";
+  let fraction = "0";
+
+  if (trimmed.includes(".")) {
+    [whole, fraction] = trimmed.split(".");
+  } else {
+    whole = trimmed;
+  }
+
+  const paddedFraction = fraction.padEnd(7, "0").slice(0, 7);
   return BigInt(whole) * STROOPS_PER_UNIT + BigInt(paddedFraction);
 }
 
