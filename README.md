@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
   <h1>stellar-wallet-helper</h1>
   <p><strong>Enterprise-grade wallet integration toolkit for the Stellar ecosystem.</strong></p>
 </div>
@@ -37,6 +37,8 @@ cd stellar-wallet-helper
 
 - [Signing a Stellar transaction with stellar-wallet-helper](./docs/signing-tutorial.md)
 - [Path payments: strict-send & strict-receive with slippage bounds](./docs/path-payments.md)
+- [React Native Integration Guide](./docs/react-native.md)
+- [Vue Integration Guide](./docs/vue.md)
 
 ## 馃 Contributing
 We welcome contributions from the community! Please read our [Contributing Guidelines](./CONTRIBUTING.md) to get started. Before submitting a Pull Request, ensure that you have reviewed our [Code of Conduct](./CODE_OF_CONDUCT.md).
