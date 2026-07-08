@@ -1,13 +1,35 @@
 name: CI
+
 on:
   push:
-    branches: [ main ]
+    branches: [main, master]
   pull_request:
-    branches: [ main ]
+    branches: [main, master]
+
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     steps:
-    - uses: actions/checkout@v3
-    - name: Run Tests
-      run: echo "Tests passed!"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run all tests (including property-based tests)
+        # FAST_CHECK_SEED pins the fast-check random seed for reproducibility.
+        # If a property test ever fails in CI, re-run locally with the same seed:
+        #   FAST_CHECK_SEED=1720396834 npx jest tests/property.test.ts
+        #
+        # The seed is documented here and in tests/property.test.ts.
+        env:
+          FAST_CHECK_SEED: 1720396834
+        run: npm test -- --forceExit
