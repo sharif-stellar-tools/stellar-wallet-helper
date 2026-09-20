@@ -1,10 +1,33 @@
 import { SigningPolicyEngine, MaxAmountRule, AllowedDestinationsRule, PolicyViolationError } from '../src/policy';
 import { WalletSession } from '../src/session';
-import { Transaction, Operation, Asset, Keypair, Horizon } from '@stellar/stellar-sdk';
+import { Transaction, Operation, Asset, Keypair, Horizon, Account, TransactionBuilder } from '@stellar/stellar-sdk';
 import axios from 'axios';
 import * as fc from 'fast-check';
 
-jest.mock('axios');
+jest.mock('axios', () => {
+  const actual = jest.requireActual('axios');
+  const instance = {
+    interceptors: {
+      request: { use: jest.fn(), eject: jest.fn() },
+      response: { use: jest.fn(), eject: jest.fn() },
+    },
+    get: jest.fn(),
+    post: jest.fn(),
+  };
+  return {
+    __esModule: true,
+    ...actual,
+    default: {
+      ...actual.default,
+      create: jest.fn(() => instance),
+      post: jest.fn(),
+      get: jest.fn(),
+    },
+    create: jest.fn(() => instance),
+    post: jest.fn(),
+    get: jest.fn(),
+  };
+});
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('SigningPolicyEngine & Rules', () => {
@@ -16,8 +39,8 @@ describe('SigningPolicyEngine & Rules', () => {
       new MaxAmountRule({ maxStroops: '10000000' }), // 1 XLM limit
     ]);
 
-    const account = new Horizon.Account(kp.publicKey(), '1');
-    const tx = new Horizon.TransactionBuilder(account, {
+    const account = new Account(kp.publicKey(), '1');
+    const tx = new TransactionBuilder(account, {
       fee: '100',
       networkPassphrase: 'Test SDF Network ; September 2015',
     })
@@ -40,8 +63,8 @@ describe('SigningPolicyEngine & Rules', () => {
       new MaxAmountRule({ maxStroops: '10000000' }), // 1 XLM limit
     ]);
 
-    const account = new Horizon.Account(kp.publicKey(), '1');
-    const tx = new Horizon.TransactionBuilder(account, {
+    const account = new Account(kp.publicKey(), '1');
+    const tx = new TransactionBuilder(account, {
       fee: '100',
       networkPassphrase: 'Test SDF Network ; September 2015',
     })
@@ -75,7 +98,9 @@ describe('WalletSession Manager', () => {
       feeStats: jest.fn().mockResolvedValue(mockFeeStats),
     } as unknown as Horizon.Server;
 
-    const session = new WalletSession('GB...PUBLIC_KEY', mockServer, 'https://mock-horizon.com');
+    const sessionKp = Keypair.random();
+    const destAccountKp = Keypair.random();
+    const session = new WalletSession(sessionKp.publicKey(), mockServer, 'https://mock-horizon.com');
     await session.refresh();
 
     expect(session.getCachedSequence()).toBe('100');
@@ -83,7 +108,7 @@ describe('WalletSession Manager', () => {
 
     const tx = session.buildTransaction([
       Operation.payment({
-        destination: 'GB...DEST',
+        destination: destAccountKp.publicKey(),
         asset: Asset.native(),
         amount: '10.0',
       }),
