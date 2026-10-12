@@ -1,4 +1,4 @@
-import { Horizon, TransactionBuilder, Transaction } from '@stellar/stellar-sdk';
+import { Horizon, TransactionBuilder, Transaction, Account } from '@stellar/stellar-sdk';
 
 export class WalletSession {
   private sequenceNumber: string = '0';
@@ -43,7 +43,7 @@ export class WalletSession {
     const currentSeq = BigInt(this.sequenceNumber);
     const nextSeq = (currentSeq + 1n).toString();
 
-    const account = new Horizon.Account(this.publicKey, this.sequenceNumber);
+    const account = new Account(this.publicKey, this.sequenceNumber);
     const builder = new TransactionBuilder(account, {
       fee: this.baseFee.toString(),
       networkPassphrase: this.networkPassphrase,
