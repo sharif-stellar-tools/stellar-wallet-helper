@@ -15,6 +15,10 @@ export interface AllowedDestinationsOptions {
 
 export type AllowedDestinationsRuleOptions = AllowedDestinationsOptions;
 
+export interface AllowedOperationsRuleOptions {
+  allowedOperations: string[];
+}
+
 export type MemoType = 'text' | 'id' | 'hash' | 'return' | 'none';
 
 export interface MemoValidationRuleOptions {
