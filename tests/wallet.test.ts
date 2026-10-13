@@ -2,6 +2,7 @@ import {
   SigningPolicyEngine,
   MaxAmountRule,
   AllowedDestinationsRule,
+  AllowedOperationsRule,
   MemoValidationRule,
   PolicyViolationError,
 } from '../src/policy';
@@ -153,6 +154,59 @@ describe('SigningPolicyEngine & Rules', () => {
       .build();
 
     expect(() => rule.validate(tx)).toThrow(PolicyViolationError);
+  });
+
+  it('should allow transaction with permitted operation types in AllowedOperationsRule', async () => {
+    const rule = new AllowedOperationsRule({
+      allowedOperations: ['payment', 'changeTrust'],
+    });
+
+    const account = new Account(kp.publicKey(), '1');
+    const tx = new TransactionBuilder(account, {
+      fee: '100',
+      networkPassphrase: 'Test SDF Network ; September 2015',
+    })
+      .addOperation(
+        Operation.payment({
+          destination: destKp.publicKey(),
+          asset: Asset.native(),
+          amount: '1.0',
+        })
+      )
+      .addOperation(
+        Operation.changeTrust({
+          asset: new Asset('USDC', kp.publicKey()),
+          limit: '1000',
+        })
+      )
+      .setTimeout(30)
+      .build();
+
+    expect(() => rule.validate(tx)).not.toThrow();
+  });
+
+  it('should reject transaction containing unapproved operation types in AllowedOperationsRule', async () => {
+    const rule = new AllowedOperationsRule({
+      allowedOperations: ['payment', 'changeTrust'],
+    });
+
+    const account = new Account(kp.publicKey(), '1');
+    const tx = new TransactionBuilder(account, {
+      fee: '100',
+      networkPassphrase: 'Test SDF Network ; September 2015',
+    })
+      .addOperation(
+        Operation.accountMerge({
+          destination: destKp.publicKey(),
+        })
+      )
+      .setTimeout(30)
+      .build();
+
+    expect(() => rule.validate(tx)).toThrow(PolicyViolationError);
+    expect(() => rule.validate(tx)).toThrow(
+      'Operation type "accountMerge" is not in the allowed operations whitelist'
+    );
   });
 });
 

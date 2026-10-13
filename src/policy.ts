@@ -3,6 +3,7 @@ import {
   PolicyRule,
   MaxAmountRuleOptions,
   AllowedDestinationsRuleOptions,
+  AllowedOperationsRuleOptions,
   MemoValidationRuleOptions,
 } from './types';
 
@@ -10,6 +11,28 @@ export class PolicyViolationError extends Error {
   constructor(message: string) {
     super(message);
     this.name = 'PolicyViolationError';
+  }
+}
+
+export class AllowedOperationsRule implements PolicyRule {
+  public name = 'AllowedOperationsRule';
+  private allowedOperations: Set<string>;
+
+  constructor(options: AllowedOperationsRuleOptions) {
+    this.allowedOperations = new Set(options.allowedOperations);
+  }
+
+  public validate(tx: Transaction): void {
+    if (!tx.operations || tx.operations.length === 0) {
+      return;
+    }
+    for (const op of tx.operations) {
+      if (!this.allowedOperations.has(op.type)) {
+        throw new PolicyViolationError(
+          `Operation type "${op.type}" is not in the allowed operations whitelist: ${Array.from(this.allowedOperations).join(', ')}.`
+        );
+      }
+    }
   }
 }
 
