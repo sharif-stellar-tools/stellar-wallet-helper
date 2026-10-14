@@ -56,6 +56,22 @@ const policy = new SigningPolicyEngine([
 await policy.validateAndSign(transaction, secretKey);
 ```
 
+### 3. Ledger Nano Hardware Wallet Signing (WebHID)
+
+```typescript
+import { LedgerTransportFactory, LedgerSigner, TransportType } from '@sharif-stellar-tools/stellar-wallet-helper';
+
+// Initialize WebHID connection in browser
+const transport = await LedgerTransportFactory.create(TransportType.WebHID);
+const signer = new LedgerSigner(transport);
+
+// Fetch address and sign transaction envelope
+const address = await signer.getPublicKey("44'/148'/0'");
+const signedXdr = await signer.signTransaction("44'/148'/0'", txEnvelopeXdr);
+```
+
+For complete React dApp integration flows, UI state handlers, and security considerations, see the [Hardware Wallet Developer Guide](./docs/hardware_wallet_guide.md).
+
 ---
 
 ## 🧪 Installation & Testing
